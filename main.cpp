@@ -27,6 +27,21 @@ void SavePassword(const string& site, const string& password) {
 	}
 }
 
+void LoadPasswords() {
+	ifstream file("passwords.txt"); // ifstream means input file stream
+	if (file.is_open()) {
+		string site, password;
+		displayMessage("\nSaved Passwords:");
+		while (file >> site >> password) {
+			cout << "Site: " << site << ", Password: " << password << endl;
+		}
+		file.close();
+	}
+	else {
+		cerr << "\nError: [System] No passwords saved yet.\n";
+	}
+}
+
 int main() {
 	int choice;
 	string site, password;
@@ -50,13 +65,13 @@ int main() {
 				SavePassword(site, password);
 				break;
 			case 2:
-
+				LoadPasswords();
 				break;
 			case 3:
-
+				displayMessage("\n[System] Exiting... ");
 				break;
 			default:
-
+				displayMessage("\n[System] Invalid choice. Please try again.");
 				break;
 		}
 		 
