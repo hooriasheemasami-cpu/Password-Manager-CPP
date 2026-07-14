@@ -15,6 +15,18 @@ void displayMenu() {
 	cout << "Enter your choice: ";
 }
 
+void SavePassword(const string& site, const string& password) {
+	ofstream file("passwords.txt", ios::app); // Open file in append mode, ofstream means output file stream, appending new information in the file
+	if (file.is_open()) {
+		file << site << " " << password << endl;
+		file.close();
+		displayMessage("Password saved successfully.");
+	}
+	else {
+		cerr << "Error: Unable to open file for writing. \n";
+	}
+}
+
 int main() {
 	int choice;
 	string site, password;
@@ -31,7 +43,11 @@ int main() {
 
 		switch (choice) {
 			case 1:
-
+				displayMessage("Enter the site name: ");
+				cin >> site;
+				displayMessage("Enter the password: ");
+				cin >> password;
+				SavePassword(site, password);
 				break;
 			case 2:
 
